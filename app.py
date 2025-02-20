@@ -1,15 +1,30 @@
 from flask import Flask, jsonify, render_template_string
 from faker import Faker
+import requests
+import time
 
 app = Flask(__name__)
 fake = Faker()
 
-# Fixed responses for each endpoint with dynamic data
+def generate_paragraph():
+    return " ".join([fake.sentence() for _ in range(3, 6)])
+
 def get_flight_info():
     return {
-        "endpoint1": f"Autopilot is engaged. Current altitude: {fake.random_int(min=25000, max=35000)} feet, Speed: {fake.random_int(min=400, max=550)} knots",
-        "endpoint2": f"Weather conditions: {fake.random_element(['Clear skies', 'Partly cloudy', 'Overcast'])}, Wind speed: {fake.random_int(min=5, max=30)} knots, Temperature: {fake.random_int(min=-10, max=30)}°C",
-        "endpoint3": f"Flight {fake.bothify(text='??###')}: {fake.city()} to {fake.city()}, ETA: {fake.random_int(min=1, max=12)} hours {fake.random_int(min=0, max=59)} minutes"
+        "endpoint1": f"""Autopilot Status Report:
+{generate_paragraph()} Current altitude is {fake.random_int(min=25000, max=35000)} feet. {generate_paragraph()} 
+Flight systems are {fake.random_element(['nominal', 'optimal', 'functioning within parameters'])}.
+{generate_paragraph()}""",
+        
+        "endpoint2": f"""Weather Analysis:
+{generate_paragraph()} Visibility is {fake.random_int(min=5, max=15)} kilometers. {generate_paragraph()}
+Atmospheric conditions: {fake.random_element(['stable', 'improving', 'requiring minor adjustments'])}.
+{generate_paragraph()}""",
+        
+        "endpoint3": f"""Navigation Update:
+Flight {fake.bothify(text='??###')} from {fake.city()} to {fake.city()}. {generate_paragraph()}
+{generate_paragraph()} Estimated arrival in {fake.random_int(min=1, max=12)} hours {fake.random_int(min=0, max=59)} minutes.
+{generate_paragraph()}"""
     }
 
 def get_random_text(endpoint_name):
@@ -33,6 +48,25 @@ def endpoint3():
     return jsonify({"text": get_random_text("endpoint3")})
 
 
+@app.route("/api/endpoint4", methods=["GET"])
+def endpoint4():
+    try:
+        # Add random timestamp to force new image each time
+        timestamp = int(time.time())
+        image_url = f'https://picsum.photos/500/300?random={timestamp}'
+        return jsonify({
+            "text": f"""Image Request:
+A new random image has been retrieved from Lorem Picsum. 
+URL: {image_url}""",
+            "image_url": image_url
+        })
+    except Exception as e:
+        return jsonify({
+            "text": "Error fetching image",
+            "error": str(e)
+        }), 500
+
+
 # Frontend chatbot-like interface
 @app.route("/")
 def index():
@@ -53,6 +87,7 @@ def index():
         <button onclick="callEndpoint('endpoint1')">Call Endpoint 1</button>
         <button onclick="callEndpoint('endpoint2')">Call Endpoint 2</button>
         <button onclick="callEndpoint('endpoint3')">Call Endpoint 3</button>
+        <button onclick="callEndpoint('endpoint4')">Call Endpoint 4</button>
         <div id="response">
             <p>Responses will appear here.</p>
         </div>
@@ -76,5 +111,4 @@ def index():
 
 
 if __name__ == "__main__":
-    # Listen on port 8888 on all interfaces with debug mode enabled
-    app.run(host="0.0.0.0", port=8888, debug=True)
+    app.run(host="0.0.0.0", port=8025, debug=True)
