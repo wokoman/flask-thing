@@ -1,17 +1,20 @@
 from flask import Flask, jsonify, render_template_string
+from faker import Faker
 
 app = Flask(__name__)
+fake = Faker()
 
-# Fixed responses for each endpoint
-ENDPOINT_RESPONSES = {
-    "endpoint1": "Autopilot is engaged. Current altitude: 30,000 feet, Speed: 500 knots",
-    "endpoint2": "Weather conditions: Clear skies, Wind speed: 15 knots, Temperature: 15°C",
-    "endpoint3": "Navigation status: On course, ETA: 2 hours 15 minutes, Distance to destination: 1,000 NM"
-}
-
+# Fixed responses for each endpoint with dynamic data
+def get_flight_info():
+    return {
+        "endpoint1": f"Autopilot is engaged. Current altitude: {fake.random_int(min=25000, max=35000)} feet, Speed: {fake.random_int(min=400, max=550)} knots",
+        "endpoint2": f"Weather conditions: {fake.random_element(['Clear skies', 'Partly cloudy', 'Overcast'])}, Wind speed: {fake.random_int(min=5, max=30)} knots, Temperature: {fake.random_int(min=-10, max=30)}°C",
+        "endpoint3": f"Flight {fake.bothify(text='??###')}: {fake.city()} to {fake.city()}, ETA: {fake.random_int(min=1, max=12)} hours {fake.random_int(min=0, max=59)} minutes"
+    }
 
 def get_random_text(endpoint_name):
-    return f"From {endpoint_name}: {ENDPOINT_RESPONSES[endpoint_name]}"
+    responses = get_flight_info()
+    return f"From {endpoint_name}: {responses[endpoint_name]}"
 
 
 # API endpoints
