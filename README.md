@@ -25,17 +25,17 @@ python run.py
 ```
 
 This will:
-- Start Flask backend on port 8025
+- Start Flask backend on port 5000
 - Launch Streamlit frontend on port 8501 in headless mode
 - Open your default web browser automatically
-- Start Flask backend service on port 8025
+- Start Flask backend service on port 5000
 - Launch Streamlit frontend service on port 8501
 - Both services will be accessible via HTTP
 
 ## Deployment Notes
 
 - Application is designed to run in containerized environments
-- Flask backend exposes REST API on port 8025
+- Flask backend exposes REST API on port 5000
 - Streamlit frontend serves UI on port 8501
 - No browser automation or local dependencies required
 

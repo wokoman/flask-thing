@@ -1,3 +1,3 @@
 # Server configuration
-FLASK_PORT = 8025
+FLASK_PORT = 5000
 STREAMLIT_PORT = 8501 
