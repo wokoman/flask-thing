@@ -2,11 +2,11 @@ import multiprocessing
 import subprocess
 import sys
 import time
-from config import FLASK_PORT, STREAMLIT_PORT
+from config import FLASK_PORT, STREAMLIT_PORT, FLASK_HOST, STREAMLIT_HOST
 
 def run_flask():
     from app import app
-    app.run(host="0.0.0.0", port=FLASK_PORT, debug=False)
+    app.run(host=FLASK_HOST, port=FLASK_PORT, debug=False)
 
 def run_streamlit():
     # Wait a moment for Flask to start
@@ -17,7 +17,7 @@ def run_streamlit():
         "run", 
         "frontend.py",
         "--server.port", str(STREAMLIT_PORT),
-        "--server.address", "localhost",
+        "--server.address", STREAMLIT_HOST,
         "--server.headless", "true"  # Run in headless mode
     ])
     
