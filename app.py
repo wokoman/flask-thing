@@ -1,10 +1,12 @@
 from flask import Flask, jsonify, render_template_string
+from flask_cors import CORS
 from faker import Faker
 import requests
 import time
-from config import FLASK_PORT
+from config import FLASK_PORT, FLASK_HOST
 
 app = Flask(__name__)
+CORS(app)
 fake = Faker()
 
 def generate_paragraph():
@@ -112,4 +114,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=FLASK_PORT, debug=True)
+    app.run(host=FLASK_HOST, port=FLASK_PORT, debug=True)
