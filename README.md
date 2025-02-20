@@ -1,4 +1,3 @@
-
 # Flask + Streamlit Demo App
 
 A demo application showing integration between Flask API backend and Streamlit frontend with dynamic responses and image generation.
@@ -19,38 +18,27 @@ uv pip install -r requirements.txt
 
 ## Running the Application
 
-1. Start Flask backend (port 8025):
+Run both Flask backend and Streamlit frontend with a single command:
 
-    ```bash
-    python app.py
-    ```
+```bash
+python run.py
+```
 
-2. In a new terminal, start Streamlit frontend:
+This will:
+- Start Flask backend on port 8025
+- Launch Streamlit frontend on port 8501 in headless mode
+- Open your default web browser automatically
+- Start Flask backend service on port 8025
+- Launch Streamlit frontend service on port 8501
+- Both services will be accessible via HTTP
 
-    ```bash
-    streamlit run frontend.py
-    ```
+## Deployment Notes
+
+- Application is designed to run in containerized environments
+- Flask backend exposes REST API on port 8025
+- Streamlit frontend serves UI on port 8501
+- No browser automation or local dependencies required
 
 ## API Endpoints
 
-- `/api/endpoint1` - Generates autopilot status with random flight parameters
-- `/api/endpoint2` - Provides weather analysis with random conditions
-- `/api/endpoint3` - Returns navigation updates with random flight details
-- `/api/endpoint4` - Serves random images from Lorem Picsum API
-
-## Commands
-
-Available text commands in Streamlit interface:
-
-- `status` or `autopilot` - Flight status
-- `weather` - Weather conditions
-- `navigation` or `route` - Flight details
-- `image` - Random photo from Lorem Picsum
-
-## Features
-
-- Flask backend with dynamic text generation using Faker
-- Streamlit frontend with typing animation
-- Real-time image fetching from Lorem Picsum
-- Command history with clear functionality
-- Simulated processing delays with spinners
+- `/api/endpoint1`

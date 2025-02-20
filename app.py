@@ -2,6 +2,7 @@ from flask import Flask, jsonify, render_template_string
 from faker import Faker
 import requests
 import time
+from config import FLASK_PORT
 
 app = Flask(__name__)
 fake = Faker()
@@ -111,4 +112,4 @@ def index():
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8025, debug=True)
+    app.run(host="0.0.0.0", port=FLASK_PORT, debug=True)

@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import time
 import random
+from config import FLASK_PORT
 
 st.title("Flight Control System")
 st.subheader("Natural Language Flight Control")
@@ -22,7 +23,7 @@ def clear_history():
 # Function to make API calls
 def call_endpoint(endpoint):
     try:
-        response = requests.get(f"http://localhost:8025/api/{endpoint}")
+        response = requests.get(f"http://localhost:{FLASK_PORT}/api/{endpoint}")
         return response.json()  # Return the full JSON response
     except requests.exceptions.RequestException as e:
         st.error(f"Error connecting to API: {e}")
