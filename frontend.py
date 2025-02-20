@@ -19,8 +19,8 @@ def clear_history():
     st.session_state.prompt = ""
     st.session_state.last_input = ""
 
-# Define base URL for API calls
-BASE_URL = "http://34.107.10.39:32080"
+# Define base URL for API calls - use relative URL since we're behind a proxy
+BASE_URL = ""  # Changed from absolute URL to relative
 
 # Function to make API calls
 def call_endpoint(endpoint):
