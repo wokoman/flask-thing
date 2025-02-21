@@ -26,7 +26,10 @@ python run.py
 
 This will:
 - Start Flask backend on port 5000
-- Launch Streamlit frontend on port 8501
+- Launch Streamlit frontend on port 8501 in headless mode
+- Open your default web browser automatically
+- Start Flask backend service on port 5000
+- Launch Streamlit frontend service on port 8501
 - Both services will be accessible via HTTP
 
 ## Deployment Notes
@@ -35,18 +38,6 @@ This will:
 - Flask backend exposes REST API on port 5000
 - Streamlit frontend serves UI on port 8501
 - No browser automation or local dependencies required
-
-## Environment Variables
-
-- `LOCAL_DEV`: Controls API URL configuration
-  - `true` (default): Uses direct Flask URL for local development
-  - `false`: Uses relative paths for production/NGINX setup
-
-Example for production:
-```bash
-export LOCAL_DEV=false
-python run.py
-```
 
 ## API Endpoints
 
