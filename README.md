@@ -36,33 +36,6 @@ This will:
 - Streamlit frontend serves UI on port 8501
 - No browser automation or local dependencies required
 
-## Running as a Service
-
-Create a systemd service file:
-```ini
-# /etc/systemd/system/flask-streamlit.service
-[Unit]
-Description=Flask Streamlit Application
-After=network.target
-
-[Service]
-User=ubuntu
-WorkingDirectory=/home/ubuntu/app
-Environment="LOCAL_DEV=false"
-ExecStart=/home/ubuntu/app/.venv/bin/python /home/ubuntu/app/run.py
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-```
-
-Enable and start:
-```bash
-sudo systemctl daemon-reload
-sudo systemctl enable flask-streamlit
-sudo systemctl start flask-streamlit
-```
-
 ## Environment Variables
 
 - `LOCAL_DEV`: Controls API URL configuration
