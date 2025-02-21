@@ -38,6 +38,3 @@ wheels/
 # Operating System
 .DS_Store
 Thumbs.db 
-
-# Streamlit
-.streamlit/
